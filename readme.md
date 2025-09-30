@@ -78,7 +78,7 @@ return [
         'user' => 'root',
         'pass' => '',
     ],
-    'base_url' => '/moduleconnexion/public',
+    'base_url' => '/module-connexion/public',
 ];
 ```
 
