@@ -15,7 +15,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Login</label>
-                <input type="text" name="login" value="<?= htmlspecialchars($u['login']) ?>" disabled>
+                <input type="text" name="login" class="form-control" value="<?= htmlspecialchars($user['login'] ?? '') ?>" required>
             </div>
 
             <div class="mb-3">
