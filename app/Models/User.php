@@ -53,16 +53,15 @@ class User
     /**
      * Met à jour un utilisateur
      */
-    public function update(int $id, string $login, string $prenom, string $nom, ?string $hashedPassword = null): bool
+    public function update(int $id, string $prenom, string $nom, ?string $hashedPassword = null): bool
     {
         if ($hashedPassword) {
             $stmt = $this->pdo->prepare(
                 'UPDATE utilisateurs 
-                 SET login = :login, prenom = :prenom, nom = :nom, password = :password 
-                 WHERE id = :id'
+             SET prenom = :prenom, nom = :nom, password = :password 
+             WHERE id = :id'
             );
             return $stmt->execute([
-                ':login' => $login,
                 ':prenom' => $prenom,
                 ':nom' => $nom,
                 ':password' => $hashedPassword,
@@ -71,17 +70,17 @@ class User
         } else {
             $stmt = $this->pdo->prepare(
                 'UPDATE utilisateurs 
-                 SET login = :login, prenom = :prenom, nom = :nom 
-                 WHERE id = :id'
+             SET prenom = :prenom, nom = :nom 
+             WHERE id = :id'
             );
             return $stmt->execute([
-                ':login' => $login,
                 ':prenom' => $prenom,
                 ':nom' => $nom,
                 ':id' => $id
             ]);
         }
     }
+
 
     /**
      * Liste tous les utilisateurs
