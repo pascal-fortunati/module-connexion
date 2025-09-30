@@ -107,6 +107,12 @@ http://localhost/moduleconnexion/public
 
 ---
 
+## 📐 Maquette
+
+Vous pouvez consulter la maquette du projet ici : [maquette_module_connexion.pdf](maquette_module_connexion.pdf)
+
+---
+
 ## 🔐 Sécurité
 
 - 🔒 Protection CSRF pour tous les formulaires
