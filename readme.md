@@ -118,7 +118,7 @@ http://localhost/moduleconnexion/public
 
 ## 📄 Licence
 
-Ce projet est sous licence **MIT**. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+Ce projet est sous licence **MIT**. Voir le fichier [LICENSE](licence) pour plus de détails.
 
 ---
 
