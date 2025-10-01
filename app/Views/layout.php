@@ -33,8 +33,11 @@ if (!empty($_GET['theme']) && in_array($_GET['theme'], $availableThemes)) {
   $_SESSION['theme'] = $_GET['theme'];
 }
 
+// URL de base pour les liens
+$currentPage = $_GET['p'] ?? 'home';
+
 // Thème actuel : session ou défaut
-$theme = $_SESSION['theme'] ?? 'sketchy';
+$theme = $_SESSION['theme'] ?? 'lux';
 ?>
 <!doctype html>
 <html lang="fr">
@@ -45,6 +48,7 @@ $theme = $_SESSION['theme'] ?? 'sketchy';
   <title>Module Connexion</title>
   <!-- Bootswatch Theme -->
   <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/<?= $theme ?>/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
   <style>
     body {
       background-color: #f5f5f5;
@@ -73,18 +77,22 @@ $theme = $_SESSION['theme'] ?? 'sketchy';
   <div class="container d-flex justify-content-center">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100">
       <div class="container-fluid">
-        <a class="navbar-brand" href="<?= $baseUrl ?>/index.php">Module Connexion</a>
+        <a class="navbar-brand" href="<?= $baseUrl ?>index.php">Module Connexion</a>
         <div class="d-flex align-items-center flex-wrap">
           <?php if (!empty($_SESSION['user_login'])): ?>
             <span class="text-white me-3">Connecté : <strong><?= htmlspecialchars($_SESSION['user_login']) ?></strong></span>
-            <a class="btn btn-outline-light btn-sm btn-custom me-1" href="<?= $baseUrl ?>index.php?p=profile">Profil</a>
+
+            <a class="btn btn-outline-light btn-sm btn-custom me-1 <?= $currentPage === 'home' ? 'active' : '' ?>" href="<?= $baseUrl ?>index.php?p=home">Accueil</a>
+            <a class="btn btn-outline-light btn-sm btn-custom me-1 <?= $currentPage === 'profile' ? 'active' : '' ?>" href="<?= $baseUrl ?>index.php?p=profile">Profil</a>
+
             <?php if ($_SESSION['user_login'] === 'admin'): ?>
-              <a class="btn btn-warning btn-sm btn-custom me-1" href="<?= $baseUrl ?>index.php?p=admin">Admin</a>
+              <a class="btn btn-warning btn-sm btn-custom me-1 <?= $currentPage === 'admin' ? 'active' : '' ?>" href="<?= $baseUrl ?>index.php?p=admin">Admin</a>
             <?php endif; ?>
-            <a class="btn btn-outline-light btn-sm btn-custom" href="<?= $baseUrl ?>index.php?p=logout">Déconnexion</a>
+
+            <a class="btn btn-outline-light btn-sm btn-custom <?= $currentPage === 'logout' ? 'active' : '' ?>" href="<?= $baseUrl ?>index.php?p=logout">Déconnexion</a>
           <?php else: ?>
-            <a class="btn btn-light btn-sm btn-custom me-2" href="<?= $baseUrl ?>index.php?p=login">Connexion</a>
-            <a class="btn btn-success btn-sm btn-custom" href="<?= $baseUrl ?>index.php?p=register">Inscription</a>
+            <a class="btn btn-light btn-sm btn-custom me-2 <?= $currentPage === 'login' ? 'active' : '' ?>" href="<?= $baseUrl ?>index.php?p=login">Connexion</a>
+            <a class="btn btn-success btn-sm btn-custom <?= $currentPage === 'register' ? 'active' : '' ?>" href="<?= $baseUrl ?>index.php?p=register">Inscription</a>
           <?php endif; ?>
 
           <!-- Sélecteur de thème -->
@@ -112,7 +120,12 @@ $theme = $_SESSION['theme'] ?? 'sketchy';
       ?>
     </div>
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    // Active la coloration syntaxique sur tous les blocs <pre><code>
+    hljs.highlightAll();
+  </script>
 </body>
 
 </html>
