@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Core;
 
 class Csrf
 {
+    // Démarre une session et génère un token CSRF si nécessaire
     public static function start()
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -12,6 +14,7 @@ class Csrf
         return $_SESSION['_csrf_token'];
     }
 
+    // Vérifie la validité du token CSRF
     public static function check($token)
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
